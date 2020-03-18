@@ -1,85 +1,87 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(search_form) }}
-        <button class="button is-primary is-fullwidth" type="submit">Rechercher</button>
-    {{ form_end(search_form) }}
+    <div class="search__form">
+        {{ form_start(search_form) }}
+            {{ form_row(search_form.commune, { label: "Nom de la commune" }) }}
+            {{ form_row(search_form.code, { label: "Code postal" }) }}
+            <button class="button is-primary is-fullwidth" type="submit">Rechercher</button>
+        {{ form_end(search_form) }}
+    </div>
 
-    <ul class="results">
+    <div class="results">
         {% if results is defined %}
             {% for result in results %}
-                {% if result.nom is defined %}
-                    <li class="commune__name">
-                        Nom : {{ result.nom }}
-                    </li>
-                    <br>
-                {% endif %}
-                <ul class="commune__code">
-                    Code Postaux :
-                    {% if result.codesPostaux is defined %}
-                        {% for code in result.codesPostaux %}
-                            <li>{{ code }}</li>
-                        {% endfor %}
+                <div class="results__content">
+                    {% if result.nom is defined %}
+                        <span class="commune__name">
+                            Nom : {{ result.nom }}
+                        </span>
+                        <br>
                     {% endif %}
-                </ul>
-                <br>
-                {% if result.codeDepartement is defined %}
-                    <li class="commune__code--department">
-                        Department : {{ result.codeDepartement }}
-                    </li>
-                    <br>
-                {% endif %}
-                {% if result.codeRegion is defined %}
-                    <li class="commune__code--region">
-                        Region : {{ result.codeRegion }}
-                    </li>
-                    <br>
-                {% endif %}
-                {% if result.population is defined %}
-                    <li class="commune__population">
-                        Population : {{ result.population }}
-                    </li>
-                {% endif %}
-                {% if result.extraInformations is defined %}
-                    <div class="facilities">
-                        {% if result.extraInformations.features is defined %}
-                            {% for feature in result.extraInformations.features %}
-                                {% if feature.properties is defined %}
-                                    <div class="town-hall">
-                                        {% if result.population.nom is defined %}
-                                            <span class="town-hall__name">
-                                                Nom de la mairie : {{ feature.properties.nom }}
-                                            </span>
-                                            <br>
-                                        {% endif %}
-                                        {% if result.population.telephone is defined %}
-                                            <span class="town-hall__phone">
-                                                Téléphone : {{ feature.properties.telephone }}
-                                            </span>
-                                        {% endif %}
-                                        {% if feature.properties.adresses is defined %}
-                                            <span class="town-hall__address">
-                                                Adresse : {{ feature.properties.adresses[0].lignes[0] }}
-                                            </span>
-                                        {% endif %}
-                                        <br>
-                                        {% if feature.properties.url is defined %}
-                                            <span class="town-hall__url">
-                                                Site Internet : <a href="{{ feature.properties.url }}">Ici !</a>
-                                            </span>
-                                            <br>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
+                    <ul class="commune__code">
+                        Code Postaux :
+                        {% if result.codesPostaux is defined %}
+                            {% for code in result.codesPostaux %}
+                                <li>{{ code }}</li>
                             {% endfor %}
                         {% endif %}
-                    </div>
-                {% endif %}
-                <br>
-                <br>
-                <br>
-                <br>
+                    </ul>
+                    <br>
+                    {% if result.codeDepartement is defined %}
+                        <span class="commune__code--department">
+                            Department : {{ result.codeDepartement }}
+                        </span>
+                        <br>
+                    {% endif %}
+                    {% if result.codeRegion is defined %}
+                        <span class="commune__code--region">
+                            Region : {{ result.codeRegion }}
+                        </span>
+                        <br>
+                    {% endif %}
+                    {% if result.population is defined %}
+                        <span class="commune__population">
+                            Population : {{ result.population }}
+                        </span>
+                    {% endif %}
+                    {% if result.extraInformations is defined %}
+                        <div class="facilities">
+                            {% if result.extraInformations.features is defined %}
+                                {% for feature in result.extraInformations.features %}
+                                    {% if feature.properties is defined %}
+                                        <div class="town-hall">
+                                            {% if result.population.nom is defined %}
+                                                <span class="town-hall__name">
+                                                    Nom de la mairie : {{ feature.properties.nom }}
+                                                </span>
+                                                <br>
+                                            {% endif %}
+                                            {% if result.population.telephone is defined %}
+                                                <span class="town-hall__phone">
+                                                    Téléphone : {{ feature.properties.telephone }}
+                                                </span>
+                                            {% endif %}
+                                            {% if feature.properties.adresses is defined %}
+                                                <span class="town-hall__address">
+                                                    Adresse : {{ feature.properties.adresses[0].lignes[0] }}
+                                                </span>
+                                            {% endif %}
+                                            <br>
+                                            {% if feature.properties.url is defined %}
+                                                <span class="town-hall__url">
+                                                    Site Internet : <a href="{{ feature.properties.url }}">Ici !</a>
+                                                </span>
+                                                <br>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
             {% endfor %}
         {% endif %}
-    </ul>
+        </div>
 {% endblock %}

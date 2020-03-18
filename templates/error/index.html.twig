@@ -2,9 +2,12 @@
 
 {% block body %}
     <div class="error">
-        <a href="{{ path('home') }}">Retour</a>
+        <span class="error__emoji">
+            🚨
+        </span>
         <span class="error__message">
             {{ message }}
         </span>
+        <a href="{{ path('home') }}">Retour</a>
     </div>
 {% endblock %}

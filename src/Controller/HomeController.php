@@ -42,7 +42,7 @@ class HomeController extends AbstractController
 
             if (!$results) {
                 return $this->render('error/index.html.twig', [
-                    'message' => 'There is no data for this search...',
+                    'message' => 'There is no data fetched... The search you requested does not exist or the API might be down, sorry!',
                 ]);
             }
 
