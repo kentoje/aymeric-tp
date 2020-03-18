@@ -5,7 +5,7 @@ namespace App\Service;
 
 class Helper
 {
-    static public function getInformations(string $url)
+    static public function getInformations(string $url): array
     {
         $ch = curl_init();
 
@@ -18,10 +18,6 @@ class Helper
 
         curl_close($ch);
 
-        if (!$result) {
-            $result = array();
-        }
-
-        return $result;
+        return $result ?? array();
     }
 }

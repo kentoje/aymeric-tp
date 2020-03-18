@@ -151,11 +151,12 @@ body {
 
   a {
     margin-top: 16px;
-    padding: 8px 24px;
+    padding: 10px 24px;
     color: #fff;
     background-color: #5eb5e0;
     text-decoration: none;
     border-radius: 200px;
+    font-weight: bold;
     transition: transform .2s ease-in-out;
 
     &:hover {
